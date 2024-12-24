@@ -4,6 +4,10 @@
 
 
 
+https://github.com/user-attachments/assets/7a5d5bda-8aa9-4011-bba8-d5528accac6f
+
+
+
 A React Native mobile application that allows users to browse, search, and enroll in courses. The app provides an intuitive interface for exploring educational content with additional features like enrolling , unenrolling  and search functionality.
 
 ## Features
