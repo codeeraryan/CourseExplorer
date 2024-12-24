@@ -1,22 +1,34 @@
-import { View, Text, StatusBar, SafeAreaView,Image, ScrollView, Pressable ,Button} from 'react-native'
-import React, { useState } from 'react'
+import { View, Text, StatusBar, SafeAreaView,Image, ScrollView, Pressable ,Button, TouchableOpacity,ToastAndroid} from 'react-native'
+import React, { useEffect, useState } from 'react'
 import tailwind from 'twrnc'
-import { ChevronLeftIcon, ClockIcon, UserCircleIcon } from 'react-native-heroicons/outline'
+import { ChevronLeftIcon, ClockIcon, TrashIcon, UserCircleIcon } from 'react-native-heroicons/outline'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { HeartIcon } from 'react-native-heroicons/solid'
 import Lessons from '../components/Lessons'
 import { useContext } from 'react'
-import EnrollContext, { EnrollProvider } from '../Context/EnrollContext'
+import EnrollContext from '../Context/EnrollContext'
+
 
 const Details = (props) => {
+ const showToast=()=>{ToastAndroid.show("Enrolled",ToastAndroid.SHORT,ToastAndroid.CENTER)}
     const db=useContext(EnrollContext);
     const [focus,setFocus]=useState(false);
     const [heart,setHeart]=useState(false);
+    const [Active,setActive]=useState(false);
     const insets = useSafeAreaInsets();
     const item=props.route.params;
+
+//  useEffect(()=>{console.log(db.enroll.filter(element => {if(item.id==element.id){return true} else{ return false}}))},[db.enroll])
+
+    const checkIfInDB=()=>{
+      let isAvailable = db.enroll.filter(elem=>elem?.id==item?.id)
+      return Boolean(isAvailable.length)
+    }
+ 
   return (
     
     <SafeAreaView style={{paddingTop:insets.top,flex:1,backgroundColor:"#ecf4fe"}} >
+      
       <View style={tailwind`flex-row justify-around items-center`}><View style={tailwind`p-2 justify-center items-center bg-white rounded-full `}><ChevronLeftIcon onPress={()=>{props.navigation.goBack()}} height={30} width={30} color={'gray'}/></View>
       <View><Text style={tailwind`text-xl font-semibold`}>Course Overview</Text></View>
       <View style={tailwind`p-2 justify-center items-center bg-white rounded-full `}><HeartIcon onPress={()=>{setHeart(prev=>!prev)}} height={30} width={30} color={heart?'red':'gray'}/></View></View>
@@ -45,8 +57,10 @@ const Details = (props) => {
    </View> 
     
     <View style={tailwind`bg-white-10 justify-center gap-10  flex-row h-20 p-2 bg-white rounded-t-[15]`}>
-        <View style={tailwind`bg-white h-10 w-20 flex justify-center items-center rounded-xl border-gray-200 border-2 `}><Text style={tailwind`text-[#3aaceb] font-semibold  `}>{item.price}</Text></View>
-        <Pressable onPress={()=>{db.setEnroll(prev=>[...prev,item])}}  style={tailwind`bg-[#3aaceb] h-10 w-40 flex justify-center items-center rounded-xl  `}><Text style={tailwind`text-white font-semibold `} >Enroll Now</Text></Pressable>
+        <View style={tailwind`bg-white h-10 w-20 flex justify-center items-center rounded-xl border-gray-200 border-2 `}>{checkIfInDB()?<TrashIcon color={'gray'} onPress={()=>db.setEnroll(db.enroll.filter((elem)=>{return elem.id!=item.id}))} style={tailwind` rounded-full justify-center p-2 items-center`}/>:<Text style={tailwind`text-[#3aaceb] font-semibold  `}>{item.price}</Text>}</View>
+        <TouchableOpacity
+        disabled={checkIfInDB()}
+        onPress={()=>{db.setEnroll(prev=>[...prev,item]); showToast()}}  style={tailwind`bg-[#3aaceb] h-10 w-40 flex justify-center items-center rounded-xl  `}><Text style={tailwind`text-white font-semibold `} >{checkIfInDB()?"Enrolled":"Enroll Now"}</Text></TouchableOpacity>
         </View>
     
 

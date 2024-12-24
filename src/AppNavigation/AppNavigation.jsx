@@ -9,6 +9,7 @@ const Stack = createNativeStackNavigator();
 import {
   SafeAreaProvider,
 } from 'react-native-safe-area-context';
+import SearchBar from '../Home/SearchBar';
 const AppNavigation = () => {
   return (
     <SafeAreaProvider>
@@ -16,6 +17,7 @@ const AppNavigation = () => {
     <Stack.Navigator  initialRouteName='View' screenOptions={{headerShown:false}} >
     <Stack.Screen name="View" component={MyTabs}  />
     <Stack.Screen name="Details" component={Details}  />
+    <Stack.Screen name="search" component={SearchBar}  />
     </Stack.Navigator>
 
     </NavigationContainer>

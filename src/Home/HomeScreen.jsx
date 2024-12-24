@@ -1,5 +1,5 @@
-import { SafeAreaView, Text, TextInput, View ,Button, Pressable, ScrollView, StatusBar, FlatList, TouchableOpacity } from 'react-native'
-import React, { useEffect } from 'react'
+import { SafeAreaView, Text, TextInput, View ,Button, Pressable, ScrollView, StatusBar, FlatList, TouchableOpacity, Alert } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import tailwind from 'twrnc'
 import { AdjustmentsHorizontalIcon, BellIcon, MagnifyingGlassCircleIcon, StarIcon } from "react-native-heroicons/solid"
 import { ClockIcon} from "react-native-heroicons/outline"
@@ -8,9 +8,10 @@ const blurhash = "C:\Users\CodeERAryan\Desktop\CourseExplorer\CourseExplorer\ass
 import { Image } from 'expo-image'
 import { useFonts } from 'expo-font'
 
-
-
 const HomeScreen = ({navigation}) => {
+ 
+  const [searchValue,setSearchValue]=useState("");
+  const [activeSearch,setActiveSearch]=useState(false);
   const [fontsLoaded]=useFonts({
     "DsSemi":require("../../assets/Fonts/DancingScript-SemiBold.ttf"),
     "Mr":require("../../assets/Fonts/Mynerve-Regular.ttf"),
@@ -41,9 +42,11 @@ const HomeScreen = ({navigation}) => {
     {/* searchbar and filter */}
 
     <View style={tailwind`flex-row gap-3 items-center px-3 mr-3`}> 
+    
     <View style={tailwind`bg-white py-1 px-2 m-4 w-[75%] flex-row items-center rounded-full`}>
-    <MagnifyingGlassCircleIcon size={50} color={'gray'}/><Text> <TextInput style={tailwind`h-full w-full`} placeholder='search here !'/></Text>
+    <TouchableOpacity disabled={!Boolean(searchValue)}  onPress={()=>navigation.navigate("search",searchValue)}><MagnifyingGlassCircleIcon size={50} color={Boolean(searchValue)?'#2fa7f6':'gray'}/></TouchableOpacity><Text> <TextInput style={tailwind`h-full w-full`}  onChangeText={(e)=>{setSearchValue(e)}} placeholder='search here !' defaultValue={searchValue}/></Text>
     </View>
+    
     <View style={tailwind`bg-[#2fa7f6] p-2 justify-center items-center rounded-full`}>
     <AdjustmentsHorizontalIcon size={30} color={'white'} />
     </View>
