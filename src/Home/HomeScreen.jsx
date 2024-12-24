@@ -24,7 +24,7 @@ const HomeScreen = ({navigation}) => {
   return (
   
     <SafeAreaView style={tailwind`flex-1 bg-[#ecf4fe]`}>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
     <View style={tailwind`pt-15 px-7 items-center bg-white rounded-b-[15] flex-row justify-between`}> 
 
 

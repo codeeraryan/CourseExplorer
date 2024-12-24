@@ -20,7 +20,7 @@ const SearchBar = (props) => {
     </View>
 
       <View>{(searched.length>0)? (<FlatList
-        
+        showsVerticalScrollIndicator={false}
         data={searched}
         renderItem={({item}) =>{  return (
           <Pressable onPress={()=>props.navigation.navigate('Details',{...item})}>

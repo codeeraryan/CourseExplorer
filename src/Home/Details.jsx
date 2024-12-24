@@ -29,9 +29,9 @@ const Details = (props) => {
     
     <SafeAreaView style={{paddingTop:insets.top,flex:1,backgroundColor:"#ecf4fe"}} >
       
-      <View style={tailwind`flex-row justify-around items-center`}><View style={tailwind`p-2 justify-center items-center bg-white rounded-full `}><ChevronLeftIcon onPress={()=>{props.navigation.goBack()}} height={30} width={30} color={'gray'}/></View>
+      <View style={tailwind`flex-row justify-around items-center bg-white p-4 rounded-b-[10]`}><View style={tailwind`p-1.5 justify-center items-center bg-gray-400 rounded-full `}><ChevronLeftIcon onPress={()=>{props.navigation.goBack()}} height={25} width={25} color={'white'}/></View>
       <View><Text style={tailwind`text-xl font-semibold`}>Course Overview</Text></View>
-      <View style={tailwind`p-2 justify-center items-center bg-white rounded-full `}><HeartIcon onPress={()=>{setHeart(prev=>!prev)}} height={30} width={30} color={heart?'red':'gray'}/></View></View>
+      <View style={tailwind`p-1.5 justify-center items-center bg-gray-400 rounded-full `}><HeartIcon onPress={()=>{setHeart(prev=>!prev)}} height={25} width={25} color={heart?'red':'white'}/></View></View>
 
     <View style={tailwind` p-4  `}>
      <View style={tailwind`h-90 w-90 `}>
@@ -64,7 +64,7 @@ const Details = (props) => {
         </View>
     
 
-      <StatusBar hidden={true} />
+      <StatusBar  backgroundColor={'white'} />
     </SafeAreaView>
    
   )

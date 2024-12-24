@@ -1,9 +1,5 @@
 # Course Explorer App
 
-
-
-
-
 A React Native mobile application that allows users to browse, search, and enroll in courses. The app provides an intuitive interface for exploring educational content with additional features like enrolling , unenrolling  and search functionality.
 
 ## Features

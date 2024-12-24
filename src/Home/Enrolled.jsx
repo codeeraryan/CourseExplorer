@@ -18,6 +18,7 @@ const Enrolled = ({navigation}) => {
         <View style={tailwind`flex-row items-center p-4 w-full gap-10`}><View style={tailwind`p-2 bg-white rounded-full`}><ChevronLeftIcon size={30} color={'gray'} onPress={()=>navigation.goBack()}/></View><Text style={tailwind`text-xl font-semibold`}>Enrolled Courses </Text></View> 
     </View>
     <FlatList
+        showsVerticalScrollIndicator={false}
         data={db.enroll}
         renderItem={({item}) =>{  return (
           <Pressable onPress={()=>navigation.navigate('Details',{...item})}>
